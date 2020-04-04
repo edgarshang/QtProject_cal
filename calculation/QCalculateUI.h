@@ -7,12 +7,15 @@
 
 class QCalculateUI : public QWidget
 {
-
+    Q_OBJECT
 private:
     QLineEdit *m_lineEdit;
     QPushButton *m_button[20];
     QCalculateUI();
     bool construct();
+private slots:
+    void onButtonClick();
+
 public:
     static QCalculateUI* NewInstance();
     void show();
