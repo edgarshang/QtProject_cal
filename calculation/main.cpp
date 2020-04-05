@@ -1,6 +1,7 @@
 #include <QtGui/QApplication>
 #include "QCalculateUI.h"
 #include "QCalculatorDec.h"
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
@@ -18,5 +19,8 @@ int main(int argc, char *argv[])
 //    return ret;
     int ret = 0;
     QCalculatorDec dec;
+    dec.expression("3+5*-8");
+    qDebug() << dec.result();
+
     return ret;
 }
