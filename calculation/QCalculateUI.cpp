@@ -4,13 +4,19 @@
 
 QCalculateUI::QCalculateUI():QWidget(NULL, Qt::WindowCloseButtonHint)
 {
-
+    m_cal = NULL;
 }
 
 QCalculateUI::~QCalculateUI()
 {
 
 }
+
+ICalculator *QCalculateUI::getCalculator()
+{
+    return m_cal;
+}
+
 bool QCalculateUI::construct()
 {
     bool ret = true;
@@ -51,6 +57,11 @@ bool QCalculateUI::construct()
     return ret;
 }
 
+void QCalculateUI::setCalculator(ICalculator *ical)
+{
+    m_cal = ical;
+}
+
 void QCalculateUI::onButtonClick()
 {
     QPushButton* btn = (QPushButton*)sender();
@@ -69,7 +80,11 @@ void QCalculateUI::onButtonClick()
         m_lineEdit->setText("");
     }else if(clickBtn == "=")
     {
-
+        if(m_cal != NULL)
+        {
+            m_cal->expression(m_lineEdit->text());
+            m_lineEdit->setText(m_cal->result());
+        }
     }
     else
     {
