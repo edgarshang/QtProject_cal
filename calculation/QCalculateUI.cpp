@@ -1,5 +1,6 @@
 #include "QCalculateUI.h"
 #include <QDebug>
+#include <QString>
 
 QCalculateUI::QCalculateUI():QWidget(NULL, Qt::WindowCloseButtonHint)
 {
@@ -28,6 +29,7 @@ bool QCalculateUI::construct()
     }
     m_lineEdit->move(10, 10);
     m_lineEdit->resize(240, 30);
+    m_lineEdit->setAlignment(Qt::AlignRight);
     m_lineEdit->setReadOnly(true);
 
     for(int i = 0;  i < 4; i++){
@@ -52,8 +54,30 @@ bool QCalculateUI::construct()
 void QCalculateUI::onButtonClick()
 {
     QPushButton* btn = (QPushButton*)sender();
-    qDebug() << "onButtonClick()";
-    qDebug() << btn->text();
+    QString clickBtn = btn->text();
+
+    if(clickBtn == "<-")
+    {
+        QString text = m_lineEdit->text();
+        if(text.length() > 0)
+        {
+            text.remove(text.length()-1, 1);
+        }
+        m_lineEdit->setText(text);
+    }else if(clickBtn == "C")
+    {
+        m_lineEdit->setText("");
+    }else if(clickBtn == "=")
+    {
+
+    }
+    else
+    {
+        m_lineEdit->setText(m_lineEdit->text() + btn->text());
+    }
+
+
+
 }
 
 void QCalculateUI::show()
